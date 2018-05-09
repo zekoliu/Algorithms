@@ -30,6 +30,10 @@ public class SeparateChainingHashST<Key, Value> {
         st[hash(key)].put(key, value);
     }
 
+    private void delete(Key key) {
+        st[hash(key)].delete(key);
+    }
+
     public static void main(String[] args) {
         String s = "S E A R C H E X A M P L E";
         String[] strings = s.split(" ");
