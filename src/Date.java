@@ -27,9 +27,9 @@ public class Date {
 
     public int hashCode() {
         int hash = 17;
-        hash = 31 * hash + month.hashCode();
-        hash = 31 * hash + day.hashCode();
-        hash = 31 * hash + year.hashCode();
+        hash = 31 * hash + ((Integer)month).hashCode();
+        hash = 31 * hash + ((Integer)day).hashCode();
+        hash = 31 * hash + ((Integer)year).hashCode();
         return hash;
     }
 }
