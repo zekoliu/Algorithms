@@ -4,11 +4,12 @@ import edu.princeton.cs.algs4.Transaction;
 import java.util.Date;
 
 public class Transaction {
-    private String who;
-    private Date when;
-    private double amount;
+    private final String who;
+    private final Date when;
+    private final double amount;
+    private int temp;
 
-    public Transaction_13(String name, Date data, double amt) {
+    public Transaction(String name, Date data, double amt) {
         who = name;
         when = data;
         amount = amt;
@@ -27,7 +28,18 @@ public class Transaction {
     }
 
     public String toString() {
-        return "name is: " + who + "when " + when + "amount " + amount;
+        return "name is: " + who() + "when " + when() + "amount " + amount();
+    }
+
+    public int hashCode() {
+        if (temp != 0)
+            return temp;
+        int hash = 17;
+        hash = 31 * hash + who.hashCode();
+        hash = 31 * hash + when.hashCode();
+        hash = 31 * hash + ((Double)amount).hashCode();
+        temp = hash;
+        return hash;
     }
 
     public boolean equals(Object x) {
@@ -47,5 +59,6 @@ public class Transaction {
         double amount = 100000;
         Transaction tr = new Transaction(name, date, amount);
         StdOut.println(tr.who);
+        Stdout.println(tr.hashCode());
     }
 }
