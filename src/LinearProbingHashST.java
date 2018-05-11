@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 
 public class LinearProbingHashST<Key, Value> {
@@ -81,14 +82,44 @@ public class LinearProbingHashST<Key, Value> {
         if (N > 0 && N == M / 8) resize(M / 2);
     }
 
+    public Value deleteItem(Key key) {
+        if (!contains(key)) return null;
+        int i = hash(key);
+        while (!key.equals(keys[i]))
+            i = (i + 1) % M;
+        Value value = values[i];
+        keys[i] = null;
+        values[i] = null;
+        i = (i + 1) % M;
+        while (keys[i] != null) {
+            Key keyToRedo = keys[i];
+            Value valToRedo = values[i];
+            keys[i] = null;
+            values[i] = null;
+            N--;
+            put(keyToRedo, valToRedo);
+            i = (i + 1) / M;
+        }
+        N--;
+        if (N > 0 && N == M / 8) resize(M / 2);
+        return value;
+    }
+
+    public void keys() {
+        for (int i = 0; i < M; i++)
+            if (keys[i] != null)
+                StdOut.print(keys[i] + " ");
+    }
+
     public static void main(String[] args) {
         String s = "E A S Y Q U T I O N";
         String[] strings = s.split(" ");
         LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>(11);
         for (int i = 0; i < strings.length; i++)
             st.put(strings[i], i);
-        st.delete("N");
+        StdOut.println(st.deleteItem("N"));
         StdOut.println("Get Q equal " + st.get("Q"));
         StdOut.println("Get Y equal " + st.get("Y"));
+        st.keys();
     }
 }
