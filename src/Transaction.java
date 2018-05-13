@@ -7,7 +7,7 @@ public class Transaction {
     private final String who;
     private final Date when;
     private final double amount;
-    private int temp;
+    private Integer temp;
 
     public Transaction(String name, Date data, double amt) {
         who = name;
@@ -32,7 +32,7 @@ public class Transaction {
     }
 
     public int hashCode() {
-        if (temp != 0)
+        if (temp != null)
             return temp;
         int hash = 17;
         hash = 31 * hash + who.hashCode();
