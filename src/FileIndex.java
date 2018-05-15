@@ -22,7 +22,7 @@ public class FileIndex {
             String query = StdIn.readString();
             if (st.contains(query))
                 for (File file : st.get(query))
-                    StdOut.println(" " + file.getName() );
+                    StdOut.println(" " + file.getName());
         }
     }
 }
