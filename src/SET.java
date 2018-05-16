@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.TreeSet;
 
-public class SET<Key extends Comparable<Key>> { //
+public class SET<Key extends Comparable<Key>> {
     private TreeSet<Key> st;
     public SET() {
         st = new TreeSet<Key>();
