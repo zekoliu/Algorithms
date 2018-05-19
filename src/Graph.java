@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Graph {
     private final int V;
@@ -9,6 +11,7 @@ public class Graph {
     public Graph(int V) {
         this.V = V;
         this.E = 0;
+        adj = (Bag<Integer>[]) new Bag[V];
         for (int v = 0; v < V; v++)
             adj[v] = new Bag<Integer>();
     }
@@ -51,7 +54,26 @@ public class Graph {
         E++;
     }
 
+    public boolean hasEdge(int v, int w) {
+        for (int i : adj[v])
+            if (i == w)
+                return true;
+        return false;
+    }
+
     public Iterable<Integer> adj(int v) {
         return adj[v];
+    }
+
+    public static void main(String[] args) {
+        Graph graph = new Graph(new In(args[0]));
+//        StdOut.println(graph);
+        for (int i = 0; i < graph.V(); i++) {
+            StdOut.print(i + ": ");
+            for (int v : graph.adj[i])
+                StdOut.print(v + " ");
+            StdOut.println();
+        }
+        StdOut.print(graph.hasEdge(2, 0));
     }
 }
