@@ -49,9 +49,18 @@ public class Graph {
     }
 
     public void addEdge(int v, int w) {
+        if (contains(adj[v], w) || contains(adj[w], v) || v == w)   //一二判断是否是平行，三判断是否自环
+            return;
         adj[v].add(w);
         adj[w].add(v);
         E++;
+    }
+
+    public boolean contains(Bag<Integer> bag, int v) {
+        for (int i : bag)
+            if (i == v)
+                return true;
+        return false;
     }
 
     public boolean hasEdge(int v, int w) {
@@ -65,15 +74,26 @@ public class Graph {
         return adj[v];
     }
 
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < V; i++) {
+            s = s + i + ": ";
+            for (int v : adj[i])
+                s = s + v + " ";
+            s = s + "\n";
+        }
+        return s;
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph(new In(args[0]));
-//        StdOut.println(graph);
-        for (int i = 0; i < graph.V(); i++) {
-            StdOut.print(i + ": ");
-            for (int v : graph.adj[i])
-                StdOut.print(v + " ");
-            StdOut.println();
-        }
+        StdOut.println(graph);
+//        for (int i = 0; i < graph.V(); i++) {
+//            StdOut.print(i + ": ");
+//            for (int v : graph.adj[i])
+//                StdOut.print(v + " ");
+//            StdOut.println();
+//        }
         StdOut.print(graph.hasEdge(2, 0));
     }
 }
