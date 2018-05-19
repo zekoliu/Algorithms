@@ -23,6 +23,20 @@ public class Graph {
         }
     }
 
+    public Graph(Graph G) {
+        this(G.V());
+        this.E = G.E();
+
+        for (int i = 0; i < G.V(); i++) {
+            Stack<Integer> reverse = new Stack<Integer>();
+            for (int w : G.adj[i])
+                reverse.push(w);
+            for (int w : reverse)
+                adj[i].add(w);
+        }
+
+    }
+
     public int V() {
         return V;
     }
