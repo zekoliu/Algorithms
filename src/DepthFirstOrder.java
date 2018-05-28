@@ -44,6 +44,15 @@ public class DepthFirstOrder {
         return reversePost;
     }
 
+    public boolean isTopological() {    //4.2.9
+        if (pre.size() == 0)
+            return false;
+        for (int i = 0; i < pre.size(); i++)
+            if (pre.dequeue() != reversePost.pop())
+                return false;
+        return true;
+    }
+
     public static void main(String[] args) {
         Digraph G = new Digraph(new In(args[0]));
 
