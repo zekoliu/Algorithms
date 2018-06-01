@@ -8,6 +8,9 @@ public class SearchUnionFind {
 
     public SearchUnionFind(Graph G, int s) {
         uf = new UF(G.V());
+        for (int i = 0; i < G.V(); i++)
+            for (int v : G.adj(i))
+                uf.union(v, i);
         this.s = s;
     }
 
