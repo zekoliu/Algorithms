@@ -10,19 +10,24 @@ public class GraphSG {
 
     public GraphSG(String string, String sp) {
         In in = new In(string);
-        int length = string.length();
-        StdOut.println(length);
-        adj = (Bag<Integer>[]) new Bag[length];
-        for (int i = 0; i < length; i++)
-            adj[i] = new Bag<Integer>();
-        while (in.hasNextLine()) {
-            String[] a = in.readLine().split(sp);
+        V = in.readInt();
+        E = in.readInt();
 
+        adj = (Bag<Integer>[]) new Bag[V];
+        for (int i = 0; i < V; i++)
+            adj[i] = new Bag<Integer>();
+
+        while (in.hasNextLine()) {
+            String line = in.readLine();
+            if (line.equals(""))
+                continue;
+            String[] a = line.split(sp);
+            int v = Integer.parseInt(a[0]);
             for (int i = 1; i < a.length; i++) {
-                int v = Integer.parseInt(a[0]);
+//                int v = Integer.parseInt(a[0]);
                 int w = Integer.parseInt(a[i]);
-                V+=2;
                 addEdge(v, w);
+                addEdge(w, v);
             }
         }
     }
@@ -74,8 +79,8 @@ public class GraphSG {
 
     public static void main(String[] args) {
         String s = args[0];
-        String sp = args[1];
-        GraphSG graph = new GraphSG(s, sp);
+//        String sp = args[1];
+        GraphSG graph = new GraphSG(s, " ");
         StdOut.println(graph);
 //        for (int i = 0; i < graph.V(); i++) {
 //            StdOut.print(i + ": ");
